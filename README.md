@@ -6,6 +6,9 @@ Sasha Nabila Fortuna
 
 2106632226
 
+### **Link Heroku:**
+[https://second-assignment.herokuapp.com/](https://second-assignment.herokuapp.com/)
+
 1. Berikut bagan keterkaitan antara views.py, models.py, urls.py, dan katalog.html.
 
 ![logo](https://drive.google.com/file/d/15m2bbMt-Kp1igwLSq5Ww4GXWQugH63Uy/view?usp=sharing)
