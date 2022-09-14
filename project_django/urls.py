@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# TODO: Implement Routings Here
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('katalog.urls')),
     path('katalog/', include('katalog.urls')),
 ]
-
-# TODO: Implement Routings Here
