@@ -11,7 +11,7 @@ Sasha Nabila Fortuna
 
 1. Berikut bagan keterkaitan antara views.py, models.py, urls.py, dan katalog.html.
 
-![logo](https://drive.google.com/file/d/15m2bbMt-Kp1igwLSq5Ww4GXWQugH63Uy/view?usp=sharing)
+![Django's MVT Diagram](https://drive.google.com/uc?id=15m2bbMt-Kp1igwLSq5Ww4GXWQugH63Uy)
 
 Django merupakan framework yang mengikuti struktur MVT (Model-View-Template). Model berperan sebagai objek yang menggambarkan entitas dari database dan konfigurasinya. View adalah logika dari aplikasi. Template adalah apa yang ditampilkan kepada pengguna.
 
