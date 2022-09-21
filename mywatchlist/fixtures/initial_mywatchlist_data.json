@@ -1,0 +1,112 @@
+[
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":1,
+        "fields":{
+            "watched":"Belum",
+            "title":"Big Mouth",
+            "rating":"5",
+            "release_date":"2022-07-29",
+            "review": "Bingung siapa Big Mouse nya"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":2,
+        "fields":{
+            "watched":"Sudah",
+            "title":"SPYxFamily",
+            "rating":"5",
+            "release_date":"2022-04-09",
+            "review": "Dinamika antara Anya, Loid, dan Yor berasa keluarga betulan"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":3,
+        "fields":{
+            "watched":"Sudah",
+            "title":"Mencuri Raden Saleh",
+            "rating":"4",
+            "release_date":"2022-08-25",
+            "review": "Tema Heist ala ABG menjadi penyegar banget di industri perfilman Indonesia"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":4,
+        "fields":{
+            "watched":"Sudah",
+            "title":"Doctor Strange in the Multiverse of Madness",
+            "rating":"4",
+            "release_date":"2022-05-05",
+            "review": "Not me bawling over 'I love you in every universe'"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":5,
+        "fields":{
+            "watched":"Belum",
+            "title":"Grave of the Fireflies",
+            "rating":"5",
+            "release_date":"1988-04-16",
+            "review": "The siblings deserve the better life :("
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":6,
+        "fields":{
+            "watched":"Sudah",
+            "title":"Bad Genius",
+            "rating":"4",
+            "release_date":"2017-08-23",
+            "review": "Cara nge-cheat-nya udah beda kelas"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":7,
+        "fields":{
+            "watched":"Belum",
+            "title":"Cats",
+            "rating":"1",
+            "release_date":"2019-12-27",
+            "review": "Somehow, feeling unjust with the CGI :("
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":8,
+        "fields":{
+            "watched":"Sudah",
+            "title":"The Conjuring: The Devil Made Me Do It",
+            "rating":"3",
+            "release_date":"2021-06-02",
+            "review": "Sedikit jumpscare, tapi jadi lebih banyak mikir teorinya"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":9,
+        "fields":{
+            "watched":"Belum",
+            "title":"Incantation",
+            "rating":"5",
+            "release_date":"2022-03-18",
+            "review": "Tidak disarankan nonton sendirian pas malem-malem"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":10,
+        "fields":{
+            "watched":"Sudah",
+            "title":"Memento",
+            "rating":"4",
+            "release_date":"2001-03-16",
+            "review": "Nonton ini harus melek dari awal film sampai akhir"
+        }
+    }
+]
