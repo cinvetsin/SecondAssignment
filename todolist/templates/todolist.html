@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <style>
+    table, td {
+      border: 1px solid #A020F0;
+      border-radius: 10px;
+      padding: 10px 10px 10px 10px;
+      margin: 10px 10px 10px 0px;
+      text-align: center;
+    }
+    button, h1, h3{
+      margin: 10px 10px 10px 10px;
+      text-align: center;
+    }
+    th{
+      border: 1px solid violet;
+      border-radius: 10px;
+      padding: 10px 10px 10px 10px;
+      margin: 10px 10px 10px 0px;
+      text-align: center;
+      background-color: violet;
+    }
+  </style>
+  <h1>Todolist</h1>
+
+  <h3>Welcome {{user.get_username}}</h3>
+
+  <p align="center">
+    <button><a href="{% url 'todolist:create_list' %}">Tambah Task Baru</a></button>
+  </p>
+  
+  <div class="container">
+    <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Description</th>
+      </tr>
+      {% comment %} Add the data below this line {% endcomment %}
+      {% for items in list_todo %}
+          <tr>
+              <td>{{items.date}}</td>
+              <td>{{items.title}}</td>
+              <td>{{items.description}}</td>
+          </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <p align="center">
+    <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  </p>
+
+ {% endblock content %}
