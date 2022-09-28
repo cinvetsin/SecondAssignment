@@ -27,9 +27,19 @@ Sasha Nabila Fortuna
 
 >Berikut alur data dari submisi pengguna melalui HTML form hingga memunculkan data pada template HTML:
 >
->1. Pengguna mengirimkan request berupa mengakses browser dan browser akan men-generate HTTP ke http://host/path. Selanjutnya, server akan menerima HTTP Request dari pengguna.
->2. 
+>1. Pengguna mengirimkan *request* berupa mengakses browser dan browser akan men-*generate* HTTP ke http://host/path. Selanjutnya, server akan menerima HTTP Request dari pengguna.
+>2. Server akan melihat *path* dari *request* pengguna yang akan di-*handle* oleh `views.py`. Jika *path*-nya merujuk pada halaman form HTML, server akan men-*generate*-nya dan menampilkan *layout* HTML ke pengguna.
+>3. Selanjutnya, pengguna akan mengisi form. Setelah form itu di-submit pengguna, browser akan men-generate HTTP Request, method, dan arguments ke URL tujuan berdasarkan halaman form HTML. Selanjutnya, server akan menerima HTTP Request dari browser.
+>4. Server akan menghandle lagi path dari *request* pengguna di `views.py` dan menjalankan instruksi sesuai dengan kebutuhan dan kegunaan dari aplikasi. Setelah itu, server akan men-*generate* halaman HTML dan browser akan menampilkan *layout* HTML ke pengguna.
 
 **4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.**
 
->xxx
+>1. Pada checklist pertama, kita membuat `django-app` bernama `todolist` dengan perintah `python manage.py startapp todolist`.
+>2. Pada checklist kedua, kita membuat path `todolist` pada file `urls.py` baik di folder `project_django` dan folder `todolist`.
+>3. Pada checklist ketiga, kita membuat model dari `todolist` dengan atribut `user`, `date`, `title`, dan `description`. `user` sendiri menggunakan field ForeignKey dengan menerima parameter User. ForeignKey ini digunakan saat melakukan pemetaan pada binary relationship.
+>4. Pada checklist keempat, implementasikan form registrasi, login, dan logout dengan membuat tampilan HTML nya dan mengatur logika dari tampilan HTML pada `views.py`.
+>5. Pada checklist kelima, buat tampilan HTML utama yang menampilkan tabel berisi tanggal pembuatan task, judul task, dan deskripsi task. Lalu, ada nama pengguna yang sedang login, tombol tambah task, dan tombol logout pada `todolist.html`.
+>6. Pada checklist keenam, membuat tampilan HTML yang menampilkan form untuk membuat task baru yang berisi judul dan deskripsi task pada `create.html` dan membuat class untuk atribut pada form untuk membuat task baru di `views.py` serta pengaturannya pada `views.py` juga.
+>7. Pada checklist ketujuh, membuat routing untuk tampilan registrasi, login, logout, tampilan utama, dan tampilan untuk membuat task baru dengan menambahkan path-nya pada `urls.py`.
+>8. Pada checklist kedelapan, lakukan deploy ke link heroku yang sudah pernah dibuat pada tugas sebelumnya.
+>9. Pada checklist kesembilan, membuat dua akun dan tiga dummy data saat melakukan inputan pada situs web Heroku kita.
