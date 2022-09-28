@@ -16,7 +16,7 @@ from django import forms
 
 # TODO: Create your views here.
 class TaskForm(forms.Form):
-    date = forms.DateField(label="Tanggal")
+    # date = forms.DateField(label="Tanggal")
     title = forms.CharField(label="Judul")
     description = forms.CharField(label="Deskripsi", widget=forms.Textarea)
 
@@ -66,7 +66,7 @@ def create_list(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            todo = Task(date = form.cleaned_data["date"], 
+            todo = Task(date = datetime.date.today(), 
                         title = form.cleaned_data["title"],
                         description = form.cleaned_data["description"],
                         user = request.user,)
