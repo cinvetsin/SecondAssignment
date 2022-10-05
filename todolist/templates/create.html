@@ -1,34 +1,97 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-{% block meta %}
-<title>Buat Task</title>
-{% endblock meta %}
+        body {
+            background: #FFE6F7;
+        }
 
-{% block content %}
+        td{
+            padding: 10px 10px 10px 10px;
+        }
 
-<div class = "login">
+        .login {
+            max-width: 600px;
+            min-height: 500px;
+            margin: 80px auto;
+            padding: 40px 30px 30px 30px;
+            background-color: #FFE6F7;
+            border-radius: 15px;
+            box-shadow: 13px 13px 20px #C3B1E1, -13px -13px 20px #CCCCFF;
+        }
 
-    <h1>Buat Task</h1>
+        .login .name {
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: 1.3px;
+            padding-left: 10px;
+            color: #555;
+        }
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td></td>
-                <td><input class=submit type="submit" value="Buat"></td>
-            </tr>
-        </table>
-    </form>
+        .submit {
+            box-shadow: none;
+            width: 100%;
+            height: 40px;
+            background-color: violet;
+            color: #fff;
+            border-radius: 20px;
+            box-shadow: 3px 3px 3px #b1b1b1,-3px -3px 3px #fff;
+            letter-spacing: 1.3px;
+        }
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+        .submit:hover {
+            background-color: #5d3fd3;
+        }
 
-</div>
+        .text-center{
+            padding-bottom: 10px;
+        }
 
-{% endblock content %}
+        @media(max-width: 630px) {
+            .login {
+                margin: 30px 20px;
+                padding: 40px 15px 15px 15px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <div class = "login">
+        <div class="text-center mt-4 name">
+            Buat Task
+        </div>
+    
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td></td>
+                    <td><input class=submit type="submit" value="Buat"></td>
+                </tr>
+            </table>
+        </form>
+    
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}     
+    
+    </div>
+  </body>
+</html>

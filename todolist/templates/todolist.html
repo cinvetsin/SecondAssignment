@@ -1,55 +1,192 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome, {{user.get_username}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
 
- {% block content %}
+      body {
+        background: #FFE6F7;
+        margin-top:20px;
+      }
 
-  <style>
-    table, td {
-      border: 1px solid #A020F0;
-      border-radius: 10px;
-      padding: 10px 10px 10px 10px;
-      margin: 10px 10px 10px 0px;
-      text-align: center;
-    }
-    button, h1, h3{
-      margin: 10px 10px 10px 10px;
-      text-align: center;
-    }
-    th{
-      border: 1px solid violet;
-      border-radius: 10px;
-      padding: 10px 10px 10px 10px;
-      margin: 10px 10px 10px 0px;
-      text-align: center;
-      background-color: violet;
-    }
-  </style>
-  <h1>Todolist</h1>
+      .card-margin {
+          margin-bottom: 1.875rem;
+      }
 
-  <h3>Welcome {{user.get_username}}</h3>
+      .card {
+          border: 0;
+          box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+          -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+          -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+          -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+      }
+      .card {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          word-wrap: break-word;
+          background-color: #cbc3e3;
+          background-clip: border-box;
+          border: 1px solid #e6e4e9;
+          border-radius: 8px;
+      }
 
-  <p align="center">
-    <button><a href="{% url 'todolist:create_list' %}">Tambah Task Baru</a></button>
-  </p>
-  
-  <div class="container">
-    <table style="width:100%">
-      <tr>
-        <th>Date</th>
-        <th>Title</th>
-        <th>Description</th>
-      </tr>
-      {% comment %} Add the data below this line {% endcomment %}
-      {% for items in list_todo %}
-          <tr>
-              <td>{{items.date}}</td>
-              <td>{{items.title}}</td>
-              <td>{{items.description}}</td>
-          </tr>
-      {% endfor %}
-    </table>
-  </div>
-  <p align="center">
-    <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-  </p>
+      .card:hover{
+        transform: scale(1.1);
+        background-color: violet;
+      }
 
- {% endblock content %}
+      .card-title{
+        font-weight: bold;
+      }
+
+      .card .card-header.no-border {
+          border: 0;
+      }
+
+      .card .card-header {
+          background: none;
+          padding: 0 0.9375rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          min-height: 50px;
+      }
+
+      .card-header:first-child {
+          border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+      }
+
+      .widget-49 .widget-49-title-wrapper {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      .widget-49 .widget-49-title-wrapper .widget-49-date-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #edf1fc;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 10px;
+      }
+
+      .widget-49 .widget-49-title-wrapper .widget-49-date-primary .widget-49-date {
+        color: #4e73e5;
+        line-height: 1;
+        font-size: 1rem;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .widget-49 .widget-49-title-wrapper .widget-49-meeting-info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+        font-weight: bold;
+      }
+
+      .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {
+        color: #3c4142;
+        font-size: 14px;
+      }
+
+      h1, h3{
+        margin: 10px 10px 10px 10px;
+        text-align: center;
+      }
+
+      .todos a{
+        margin: 10px 10px 10px 10px;
+        text-align: center;
+        box-shadow: none;
+        width: 60%;
+        height: 40px;
+        background-color: violet;
+        color: #fff;
+        border-radius: 25px;
+        box-shadow: 3px 3px 3px #b1b1b1,-3px -3px 3px #fff;
+        letter-spacing: 1.3px;
+      }
+
+      .todos {
+        max-width: 900px;
+        min-height: 500px;
+        margin: 80px auto;
+        padding: 40px 30px 30px 30px;
+        background-color: #FFE6F7;
+        border-radius: 15px;
+        box-shadow: 13px 13px 20px #C3B1E1, -13px -13px 20px #CCCCFF;
+      }
+
+      .todos .name {
+        font-weight: 600;
+        font-size: 30px;
+        letter-spacing: 1.3px;
+        padding-left: 10px;
+        color: #555;
+      }
+
+      .todos a:hover{
+        background-color: #CBC3E3;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <div class="todos">
+      <div class="text-center mt-4 name">
+        Todolist
+      </div>
+      <div class="text-center fs-6">
+        Welcome, {{user.get_username}}!
+      </div>
+    
+      <p align="center">
+        <a href="{% url 'todolist:create_list' %}" class="btn btn-primary">Tambah Task Baru</a>
+      </p>
+      
+      <div class="container">
+        <div class="row">
+          {% for items in list_todo %}
+          <div class="col-lg-4">
+            <div class="card card-margin">
+              <div class="card-header no-border">
+                <h5 class="card-title">{{items.title}}</h5>
+              </div>
+              <div class="card-body pt-0">
+                <div class="widget-49">
+                  <div class="widget-49-title-wrapper">
+                    <div class="widget-49-date-primary">
+                      <span class="widget-49-date">{{items.date}}</span>
+                    </div>
+                    <div class="widget-49-meeting-info">
+                      <span class="widget-49-pro-title">{{items.description}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <p align="center">
+        <a href="{% url 'todolist:logout' %}" class="btn btn-primary">Logout</a>
+      </p>
+    </div>
+  </body>
+</html>
