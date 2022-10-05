@@ -9,6 +9,7 @@ Sasha Nabila Fortuna
 ### **Link Heroku:**
 [https://second-assignment.herokuapp.com/todolist](https://second-assignment.herokuapp.com/todolist)
 
+## **Tugas 4**
 **1. Apa kegunaan `{% csrf_token %}` pada elemen `<form>`? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen `<form>`?**
 
 >CSRF token di-*generate* oleh server ke dalam bentuk string yang acak dan sulit untuk ditebak. CSRF token ini akan ditambahkan ke form secara tersembunyi. CSRF token digunakan sebagai bentuk proteksi dari serangan CSRF (*Cross Site Request Forgery*). Karena bentuk acak, sulit ditebak, dan tersembunyi pada tiap sesi pengguna (*user's session*), para *bad actor* ketika menyalin *static source code* dari halaman kita ke website berbeda akan menjadi tindakan yang sia-sia.
@@ -43,3 +44,40 @@ Sasha Nabila Fortuna
 >7. Pada checklist ketujuh, membuat routing untuk tampilan registrasi, login, logout, tampilan utama, dan tampilan untuk membuat task baru dengan menambahkan path-nya pada `urls.py`.
 >8. Pada checklist kedelapan, lakukan deploy ke link heroku yang sudah pernah dibuat pada tugas sebelumnya.
 >9. Pada checklist kesembilan, membuat dua akun dan tiga dummy data saat melakukan inputan pada situs web Heroku kita.
+
+## **Tugas 5**
+**1. Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?**
+
+>Berikut perbedaan dari Inline, Internal, dan External CSS:
+>* Pada Inline CSS, menggunakan atribut `style` di dalam elemen HTML.
+>* Pada Internal CSS, menggunakan elemen `<style>` di dalam head section.
+>* Pada External CSS, menggunakan elemen `<link>` untuk menghubungkan ke file external CSS.
+>
+>Kelebihan Inline CSS adalah elemen-elemen tertentu memiliki style sendiri. Lalu, penggunaan inline CSS juga lebih efektif pada implementasi yang sederhana atau digunakan untuk landing page sehingga proses *load*-nya berjalan lebih cepat. Kekurangannya adalah file tidak di-cache sehingga setiap mengunjungi halaman dengan inline CSS, akan diperlakukan sebagai hal yang baru. *Caching* sendiri sebaiknay digunakan saat proyek yang dibuat semakin kompleks.
+>
+>Kelebihan dari Internal CSS adalah kita bisa melimit style pada satu halaman. Namun, internal CSS akan dinilai tidak efektif jika pada page tertentu, kita menggunakan style yang sama. Dengan begitu, kita harus menuliskan kembali style-nya untuk halaman yang berbeda.
+>
+>Kelebihan external CSS adalah style bisa digunakan pada beberapa page sekaligus. Hal ini membuat kita lebih fokus pada hal lain ketimbang web design karena kita tidak perlu mengkhawatirkannya berkat external CSS. Kekurangannya adalah beberpa page akan memiliki tampilan yang sama dan tidak memiliki kontrol untuk elemen-elemen tertentu.
+
+**2. Jelaskan tag HTML5 yang kamu ketahui.**
+
+>Berikut tag HTML5 yang saya ketahui:
+>* `<audio>` untuk meng-embed suara atau audio stream ke dokumen HTML
+>* `<dialog>` untuk mendefinisikan dialog box atau subwindow
+>* `<embed>` untuk meng-embed aplikasi eksternal, biasanya berupa konten multimedia ke dokumen HTML
+>* `<footer>` menggambarkan bagian footer dari dokumen atau section
+>* `<header>` menggambarkan bagian header dari dokumen atau section
+>* `<main>` menggambarkan konten main atau dominant dari dokumen
+>* `<nav>` untuk mendefinisikan bagian dari link navigasi
+>* `<picture>` untuk mendefinisikan section untuk beberapa sumber gambar
+>* `<section>` untuk mendefinisikan section dari dokumen, seperti header, footer, dll.
+>* `<source>` untuk menentukan sumber media alternatif pada elemen media seperti `<audio>` atau `<video>`.
+>* `<video>` untuk mendefinisikan konten video pada dokumen HTML
+
+**3. Jelaskan tipe-tipe CSS selector yang kamu ketahui.**
+
+>Berikut tipe-tipe CSS selector, yaitu:
+>
+>1. 
+
+**4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.**
