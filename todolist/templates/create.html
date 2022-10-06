@@ -17,18 +17,27 @@
             background: #FFE6F7;
         }
 
-        td{
+        .login th{
             padding: 10px 10px 10px 10px;
         }
 
+        td{
+            max-width: 200px;
+        }
+
+        textarea{
+            max-width: 200px;
+        }
+
         .login {
-            max-width: 600px;
+            max-width: 400px;
             min-height: 500px;
-            margin: 80px auto;
+            margin: 160px auto;
             padding: 40px 30px 30px 30px;
             background-color: #FFE6F7;
             border-radius: 15px;
             box-shadow: 13px 13px 20px #C3B1E1, -13px -13px 20px #CCCCFF;
+            align-items: center;
         }
 
         .login .name {
@@ -58,7 +67,11 @@
             padding-bottom: 10px;
         }
 
-        @media(max-width: 630px) {
+        .login input{
+            max-width: 200px;
+        }
+
+        @media(max-width: 430px) {
             .login {
                 margin: 30px 20px;
                 padding: 40px 15px 15px 15px;
