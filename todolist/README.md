@@ -78,6 +78,16 @@ Sasha Nabila Fortuna
 
 >Berikut tipe-tipe CSS selector, yaitu:
 >
->1. 
+>1. **Universal selector** (`*`) akan men-*select* semua elemen HTML pada satu halaman
+>2. **Element selector** menggunakan tag HTML sebagai *selector* untuk mengubah properti yang terdapat dalam tag tersebut.
+>3. **id Selector** menggunakan id pada tag sebagai *selector*. Untuk men-*select* pada id tertentu, bubuhi karakter pagar/*hash* (#), diikuti dengan id elemen
+>4. **Class selector** men-*select* elemen HTML pada atribut class yang spesifik. Untuk men-*select* elemen dengan class tertentu, bubuhi karakter titik (.), diikuti dengan nama class.
 
 **4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.**
+
+>1. Pada checklist pertama, kustomisasi menggunakan bootstrap dan beberapa penyesuaian dengan CSS, dan kustomisasi dilakukan pada tampilan login, register, dan create-task. Pada halaman utama todo list, menggunakan card dengan template dari bootstrap.
+>2. Pada checklist kedua, membuat semua halamannya menjadi responsive dengan:
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+>3. Pada bagian checklist bonus, melakukan hover dengan `selector:hover`, transformasi `scale(1.1)`, dan mengganti background color dengan warna violet untuk melakukan zoom serta pergantian warna saat di-*hover*
