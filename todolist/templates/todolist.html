@@ -254,8 +254,6 @@
           getTask();
           $('#form-task').submit(function (event) {
             event.preventDefault();
-
-            var actionurl = event.currentTarget.action;
         
             $.ajax({
                 type: "POST",
