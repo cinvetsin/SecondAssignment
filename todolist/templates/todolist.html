@@ -203,7 +203,7 @@
 
 <script>
   function getTask(){
-    $("#formModal").empty();
+    $("#idCard").empty();
     $.getJSON("{% url 'todolist:logout' %}", function(data) {
         $(data).each(function(i,entry){
             $("#idCard").append(
