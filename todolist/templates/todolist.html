@@ -156,39 +156,128 @@
       <div class="text-center fs-6">
         Welcome, {{user.get_username}}!
       </div>
-    
-      <p align="center">
-        <a href="{% url 'todolist:create_list' %}" class="btn btn-primary">Tambah Task Baru</a>
-      </p>
-      
-      <div class="container">
-        <div class="row">
-          {% for items in list_todo %}
-          <div class="col-lg-4">
-            <div class="card card-margin">
-              <div class="card-header no-border">
-                <h5 class="card-title">{{items.title}}</h5>
-              </div>
-              <div class="card-body pt-0">
-                <div class="widget-49">
-                  <div class="widget-49-title-wrapper">
-                    <div class="widget-49-date-primary">
-                      <span class="widget-49-date">{{items.date}}</span>
-                    </div>
-                    <div class="widget-49-meeting-info">
-                      <span class="widget-49-pro-title">{{items.description}}</span>
-                    </div>
-                  </div>
+
+      <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="formModalLabel">New todolist</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'todolist:add_todolist' %}" method="post" id="form-task">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Judul</label>
+                  <input type="text" class="form-control" id="recipient-name">
                 </div>
-              </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Deskripsi</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input class="btn btn-primary" type="submit" name="submit" value="Buat Task" />
             </div>
           </div>
-          {% endfor %}
         </div>
       </div>
+
+      <div class="container-md">
+        <div class="">
+          <p align="center" style="padding-top: 15px">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Task Baru</button>
+          </p>
+        </div>
+        <div class="row" id="idCard">
+          {% for items in list_todo %}
+          {% empty %}
+        </div>
+        {% endfor %}
+      </div>
+
       <p align="center">
         <a href="{% url 'todolist:logout' %}" class="btn btn-primary">Logout</a>
       </p>
     </div>
+
+    <script type="text/javascript">
+      function getTask(){
+        $("#formModal").empty();
+        $.getJSON("{% url 'todolist:logout' %}", function(data) {
+            $(data).each(function(i,entry){
+                $("#idCard").append(
+                  $('<div class="col-lg-4">').append(
+                    $('<div class="card card-margin">').append(
+                      $('<div class="card-header no-border">').append(
+                        $('<h5 class="card-title">').append(
+                          entry.fields.title
+                        )
+                      ).append(
+                        $('<h5 class="card-title">').append(
+                          $('<div class="widget-49">').append(
+                            $('<div class="widget-49-title-wrapper">').append(
+                              $('<div class="widget-49-date-primary">').append(
+                                $('<span class="widget-49-date">').append(
+                                  entry.fields.date
+                                )
+                              ).append(
+                                $('<div class="widget-49-meeting-info">').append(
+                                  $('<span class="widget-49-pro-title">').append(
+                                    entry.fields.description
+                                  )
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+            })
+        })
+
+          .done(function(){
+            console.log("data loaded!");
+        })
+    
+        .fail(function(e){
+            console.log('error:');
+            console.error(e);
+        });
+      }
+
+      $(document).ready(function(){
+          getTask();
+          $('#form-task').submit(function (event) {
+            event.preventDefault();
+
+            var actionurl = event.currentTarget.action;
+        
+            $.ajax({
+                type: "POST",
+                url: "{% url 'todolist:get_todolist_json' %}",
+                data: $(this).serialize(),
+                success: function(response){
+                    $("#formModal").modal('toggle');
+                    $("#form-task > div > .form-control").each(function (i) {
+                        $(this).val("");
+                    })
+                    getTask();
+                },
+                error: function(xhr, resp, text) {
+                    console.log("create-task POST ERROR")
+                    console.log(xhr, resp, text);
+                }
+            }).done(function (data) {
+                console.log(data);
+            });
+        
+            });
+      });
+    </script>
   </body>
 </html>

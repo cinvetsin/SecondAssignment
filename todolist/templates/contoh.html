@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<style>
+    .card-hover:hover {
+        box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+        transition: all 0.1s ease;
+    }
+</style>
+{% endblock meta %}
+
+{% block content %}
+
+{% comment %} Navbar {% endcomment %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Todolist</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-top-buttons" aria-controls="navbar-top-buttons" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-top-buttons">
+            <div class="navbar-nav">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modal-create-task">Buat Task Baru</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'todolist:logout_user' %}">Logout</a>
+            </div>
+            <div class="navbar-text ms-auto">
+                <span class="mb-1">Anda login sebagai: {{username}}</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-md">
+    <!--<h4>Anda login sebagai: </h4>
+    <p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %} -->
+
+    <div class="row row-cols-1 row-cols-md-4 gap-3 mb-3" id="cards-parent"> 
+        {% for task in task_list %}
+        {% empty %}
+        </div>
+        <div class="">
+            <h4 class="text-center">Tidak ada task dalam todolist.</h4>
+            <h5 class="text-center text-muted fst-italic">Yuk, <a href="{% url 'todolist:create_task' %}">buat task baru</a>!</h5>
+        </div>
+        {% endfor %}  
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create-task">Buat Task Baru</button>
+
+<div class="modal fade" id="modal-create-task">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buat Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'todolist:create_task_ajax' %}" method="post" id="form-create-task">
+                    {% csrf_token %}
+                    <div class="form-floating mb-2">
+                        <input type="text" name="title" required id="id_title" placeholder="Judul Task" class="form-control">
+                        <label for="id_title" class="form-label">Judul Task</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <textarea type="text" name="description" required id="id_description" placeholder="Deskripsi Task" class="form-control" style="height: 125px"></textarea>
+                        <label for="id_description" class="form-label">Deskripsi Task</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Buat Task" />
+                    </div>   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function load_tasks() {
+        console.log('loading tasks');
+        $("#cards-parent").empty();
+        $.getJSON("{%url 'todolist:get_todolist_json'%}", function(data) {
+            $(data).each(function(i, entry) {
+                $("#cards-parent").append(
+                    $(`<div class="col card card-hover border border-${entry.fields.is_finished ? "success" : "danger"} px-0">`).append(
+                        $('<div class="card-body">').append(
+                            $(`<h4 class="card-title">`).append(
+                                $(`<strong>`).append(
+                                    entry.fields.title
+                                )
+                            )
+                        ).append(
+                            $(`<h5 class="card-subtitle mb-2 text-muted">`).append(
+                                entry.fields.date
+                            )
+                        ).append(
+                            $(`<h6 class="card-subtitle mb-2 text-${entry.fields.is_finished ? "success" : "danger"}">`).append(
+                                entry.fields.is_finished ? "Done" : "Not Done"
+                            )
+                        ).append(
+                            $(`<p class="card-text">`).append(
+                                entry.fields.description
+                            )
+                        )
+                    ).append(
+                        $(`<div class="card-footer">`).append(
+                            $(`<div class="btn-group" role="group">`).append(
+                                $(`<button class="btn btn-secondary" onclick="task_change_status(${entry.pk})">`).append(
+                                    "Ubah Status"
+                                )
+                            ).append(
+                                $(`<button class="btn btn-danger" onclick="task_delete(${entry.pk})">`).append(
+                                    "Hapus Task"
+                                )
+                            )
+                        )
+                    ))
+            })
+        })
+    }
+
+    function task_change_status(pk) {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'todolist:modify_task' %}",
+            data: {
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                task_pk: pk,
+                action: "toggle"
+            },
+
+            success: function(response) {
+                console.log("toggle POST OK!");
+                load_tasks();
+            },
+
+            error: function(xhr, resp, text) {
+                console.log("toggle POST ERROR")
+                console.log(xhr, resp, text);
+            }
+        });
+    }
+
+    function task_delete(pk) {
+        $.ajax({
+            url: `delete/${pk}/`,
+            type: "DELETE",
+            headers: {"X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()},
+            data: {
+                csrfmiddlewaretoken: "{{csrf_token}}"
+            },
+            success: function(response) {
+                console.log("DELETE OK!");
+                load_tasks();
+            },
+
+            error: function(xhr, resp, text) {
+                console.log("DELETE ERROR");
+                console.log(xhr, resp, text);
+            }
+        })
+    }
+
+    $(document).ready(function() {
+        console.log('document ready!');
+        load_tasks();
+
+        $(`#form-create-task`).submit(function (e) {
+            e.preventDefault();
+
+            /* url action dari form */
+            var actionurl = e.currentTarget.action;
+
+            $.ajax({
+                url: actionurl,
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log("create-task POST OK!");
+                    $("#modal-create-task").modal('toggle');
+                    $("#form-create-task > div > .form-control").each(function (i) {
+                        $(this).val("");
+                    })
+                    load_tasks();
+                },
+
+                error: function(xhr, resp, text) {
+                    console.log("create-task POST ERROR")
+                    console.log(xhr, resp, text);
+                }
+            })
+
+        })
+    })
+</script>
+<!-- <button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
+<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button> -->
+
+{% endblock content %}
