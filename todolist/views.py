@@ -68,10 +68,6 @@ def get_todolist_json(request):
     data_todolist = Task.objects.filter(user=request.user).all()
     return HttpResponse(serializers.serialize("json", data_todolist), content_type="application/json")
 
-# def get_todolist_json_by_id(request, id):
-#     data = Task.objects.filter(user=request.user, pk=id).all()
-#     return HTTPResponse(serializers.serialize("json", data)
-
 @login_required(login_url='/todolist/login/')
 def add_todolist(request):
     if request.method == "POST":
@@ -83,8 +79,8 @@ def add_todolist(request):
         new_todo = Task(user=user, date=date, title=title, description=description)
         new_todo.save()
 
-        return HttpResponse(b"CREATED", status=201)
-    return HttpResponseNotFound()
+        return HttpResponse(status=200)
+    return redirect("todolist:show_todolist")
 
 def create_list(request):
     if request.method == "POST":
