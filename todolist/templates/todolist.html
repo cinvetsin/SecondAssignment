@@ -100,6 +100,7 @@
     .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {
       color: #3c4142;
       font-size: 14px;
+      margin-right: 5px;
     }
 
     .todos a, .btn{
@@ -163,7 +164,7 @@
   <div class="container-md">
     <div class="">
       <p align="center" style="padding-top: 15px">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" data-whatever="{% url 'todolist:show_todolist' %}">Tambah Task Baru</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" data-whatever="{% url 'todolist:show_todolist' %}">Add Task</button>
       </p>
     </div>
     <div class="row" id="idCard">
@@ -189,16 +190,16 @@
         {% csrf_token %}
         <div class="modal-body" style="background-color: #FFE6F7;">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Judul</label>
+            <label for="recipient-name" class="col-form-label">Title</label>
             <input type="text" class="form-control" name="title" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Deskripsi</label>
+            <label for="message-text" class="col-form-label">Description</label>
             <textarea class="form-control" name="description" id="message-text"></textarea>
           </div>
         </div>
         <div class="modal-footer" style="background-color: #FFE6F7;">
-          <input class="btn btn-primary" type="submit" name="submit" value="Buat Task" />
+          <input class="btn btn-primary" type="submit" name="submit" value="Create Task" />
         </div>
       </form>
     </div>
