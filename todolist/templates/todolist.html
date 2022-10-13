@@ -10,7 +10,7 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    body {
+    body{
       background: #FFE6F7;
       margin-top:20px;
     }
@@ -79,6 +79,7 @@
       width: 4rem;
       height: 4rem;
       border-radius: 10px;
+      margin-left: 10px;
     }
 
     .widget-49 .widget-49-title-wrapper .widget-49-date-primary .widget-49-date {
@@ -101,7 +102,7 @@
       font-size: 14px;
     }
 
-    .todos a{
+    .todos a, .btn{
       margin: 10px 10px 10px 10px;
       text-align: center;
       box-shadow: none;
@@ -133,6 +134,10 @@
     }
 
     .todos a:hover{
+      background-color: #CBC3E3;
+    }
+
+    .btn:hover{
       background-color: #CBC3E3;
     }
 
@@ -176,23 +181,23 @@
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="formModalLabel">New todolist</h1>
+      <div class="modal-header" style="background-color: #CF9FFF;">
+        <h1 class="modal-title fs-5" id="formModalLabel" style="font-weight: bold;">New todolist</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="{% url 'todolist:add_todolist' %}" method="post" id="form-task">
         {% csrf_token %}
-        <div class="modal-body">
+        <div class="modal-body" style="background-color: #FFE6F7;">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Judul</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" name="title" id="recipient-name">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Deskripsi</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" name="description" id="message-text"></textarea>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" style="background-color: #FFE6F7;">
           <input class="btn btn-primary" type="submit" name="submit" value="Buat Task" />
         </div>
       </form>
